@@ -6,7 +6,9 @@ import lab07.Card.Suits;
 import lab07.Card.Values;
 
 /**
- * 
+ * Creates a standard deck of 52 playing cards.
+ * Contains 1 method that removes and returns a card from the deck.
+ * (dealing the card out to a player).
  * @author Jaden Young
  */
 public class Deck {
