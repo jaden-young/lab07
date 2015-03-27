@@ -254,9 +254,12 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	
 	//---------------------- nested PositionIterator class ------------------
 	private class PositionIterator implements Iterator<Position<E>> {
-		private Position<E> cursor = first();
+		private Position<E> cursor;
 		private Position<E> recent = null;
 		
+		public PositionIterator(Position<E> startingPosition) {
+			cursor = startingPosition;
+		}
 		/**
 		 * Tests whether the iterator has a next object
 		 * @return True if there is another object after, false if not
@@ -299,7 +302,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	private class PositionIterable implements Iterable<Position<E>> {
 		@Override
 		public Iterator<Position<E>> iterator() {
-			return new PositionIterator();
+			return new PositionIterator(first());
 		}
 	} //--------------- end of nested PositionIterable class ----------------- 
 	
@@ -313,7 +316,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	
 	//---------------- nested ElementIterator class --------------------------
 	private class ElementIterator implements Iterator<E> {
-		Iterator<Position<E>> posIterator = new PositionIterator();
+		Iterator<Position<E>> posIterator = new PositionIterator(first());
 		
 		/**
 		 * Returns true if there is a next item, false if not
