@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *
- * @author jaden
+ * Standard LinkedPositionalList class ripped straight from the book. 
+ * @author Jaden Young
  */
 public class LinkedPositionalList<E> implements PositionalList<E> {
 	
@@ -21,6 +21,12 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 			next = n;
 		}
 		
+		/**
+		 * Returns the element stored inside the node
+		 * @return The element stored in the node
+		 * @throws IllegalStateException if the position is invalid
+		 */
+		@Override
 		public E getElement() throws IllegalStateException {
 			if (next == null)
 				throw new IllegalStateException("Position is not valid");
@@ -48,8 +54,8 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		}
 	} //-------------- end of nested Node class ------------------------
 	
-	private Node<E> head;
-	private Node<E> tail;
+	private final Node<E> head;
+	private final Node<E> tail;
 	private int size = 0;
 	
 	/**
@@ -94,6 +100,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * Tells if the list is empty
 	 * @return true if there are no elements in the list, false if there are
 	 */
+	@Override
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -124,6 +131,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @throws IllegalArgumentException if the argument passed is not the 
 	 *	correct type or if that position does not exist
 	 */
+	@Override
 	public Position<E> before(Position<E> position) 
 			throws IllegalArgumentException {
 		Node<E> tempNode = validate(position);
@@ -138,6 +146,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @throws IllegalArgumentException if the argument passed is not the 
 	 *	correct type or if that position does not exist
 	 */
+	@Override
 	public Position<E> after(Position<E> position) 
 			throws IllegalArgumentException {
 		Node<E> tempNode = validate(position);
@@ -151,6 +160,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @return the element stored in the removed Position object
 	 * @throws IllegalArgumentException if the position is invalid
 	 */
+	@Override
 	public E remove(Position<E> position) {
 		Node<E> tempNode = validate(position);
 		Node<E> predacessor = tempNode.getPrevious();
@@ -181,6 +191,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @param element element to be added
 	 * @return the added Position object encapsulating the element
 	 */
+	@Override
 	public Position<E> addFirst(E element) {
 		return addBetween(element, head, head.getNext());
 	}
@@ -191,6 +202,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @param element element to be added
 	 * @return the added Position object
 	 */
+	@Override
 	public Position<E> addLast(E element) {
 		return addBetween(element, tail.getPrevious(), tail);
 	}
@@ -202,6 +214,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @return the Position object created by the insertion
 	 * @throws IllegalArgumentException if the position does not exist
 	 */
+	@Override
 	public Position<E> addBefore(Position<E> position, E element) 
 			throws IllegalArgumentException {
 		Node<E> tempNode = validate(position);
@@ -215,6 +228,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @return The Position object created by the insertion
 	 * @throws IllegalArgumentException if the position does not exist
 	 */
+	@Override
 	public Position<E> addAfter(Position<E> position, E element) 
 			throws IllegalArgumentException {
 		Node<E> tempNode = validate(position);
@@ -229,6 +243,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	 * @return The element that has been replaced
 	 * @throws IllegalArgumentException if the Position object does not exist
 	 */
+	@Override
 	public E set(Position<E> position, E element) 
 			throws IllegalArgumentException {
 		Node<E> tempNode = validate(position);
@@ -246,6 +261,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		 * Tests whether the iterator has a next object
 		 * @return True if there is another object after, false if not
 		 */
+		@Override
 		public boolean hasNext() {
 			return cursor != null;
 		}
@@ -256,6 +272,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		 * @throws NoSuchElementException if the iterator has reached the end of
 		 *	the list
 		 */
+		@Override
 		public Position<E> next() throws NoSuchElementException {
 			if (cursor == null) throw new NoSuchElementException("There are no "
 					+ "more elements in the list.");
@@ -269,6 +286,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		 * method
 		 * @throws IllegalStateException if there is nothing left to remove
 		 */
+		@Override
 		public void remove() throws IllegalStateException {
 			if (recent == null) throw new IllegalStateException("There is "
 					+ "nothing left to remove.");
@@ -287,6 +305,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	
 	/**
 	 * Returns and iterable representation of the list's positions
+	 * @return 
 	 */
 	public Iterable<Position<E>> positions() {
 		return new PositionIterable();
@@ -328,6 +347,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	//finally......
 	/**
 	 * Returns an iterator for the elements stored in the list 
+	 * @return an iterator that transverses the elements in the list
 	 */
 	public Iterator<E> iterator() {
 		return new ElementIterator();
