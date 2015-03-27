@@ -1,111 +1,55 @@
 package lab07;
 
+import java.util.Iterator;
+import lab07.Card.Suits;
+
 /**
  *
  * @author Jaden Young
  */
-public class CardHand<E> implements PositionalList {
+public class CardHand {
 	
-	//------------------- nested Node class ----------------------------
-	private static class Node<E> implements Position<E> {
-		private E element;
-		private Node<E> prev;
-		private Node<E> next;
-		
-		public Node(E e, Node<E> p, Node<E> n) {
-			element = e;
-			prev = p;
-			next = n;
-		}
-		
-		public Node<E> getPrevious() {
-			return prev;
-		}
-		
-		public Node<E> getNext() {
-			return next;
-		}
-		
-		public void setElement(E e) {
-			element = e;
-		}
-		
-		public void setPrevious(Node<E> p) {
-			prev = p;
-		}
-		
-		public void setNext(Node<E> n) {
-			next = n;
-		}
-	} //-------------- end of nested Node class ------------------------
+	private LinkedPositionalList<Card> hand = new LinkedPositionalList();
 	
-	private int size = 0;
-	
-	/** Returns the number of elements in the list */
-    public int size() {
-		return size;
-	}
-    
-    /** 
-	 * Tests whether the list is empty 
-	 * @return true if the list is empty, false if not
-	 */
-    public boolean isEmpty() {
-		return size == 0;
-	}
-    
-    /** 
-	 * Returns the first Position in the list(or null, if empty) 
-	 * @return the first Position object in the list
-	 */
-    public Position<E> first(){
-		
-	}
-    
-    /** Returns the last Position in the list(or null, if empty) */
-    Position<E> last();
-    
-    /** Returns the position immediately before Position p(null if p is first)*/
-    Position<E> before(Position<E> p) throws IllegalArgumentException;
-    
-    /** Returns the Position immediately after Position p(null if p is last)*/
-    Position<E> after(Position<E> p) throws IllegalArgumentException;
-    
-    /** Inserts element e at the front of the list and returns its Position*/
-    Position<E> addFirst(E e);
-    
-    /** Inserts element e at the back of the list and returns its Position*/
-    Position<E> addLast(E e);
-    
-    /** 
-	 * Inserts element e immediately before Position p
-	 * @throws IllegalArgumentException if the position is invalid, or the
-	 *	element is the wrong data type
-	 * @return new Position of added element 
-	 */
-	Position<E> addBefore(Position<E> p, E e) throws IllegalArgumentException;
-	
-	/** 
-	 * Inserts element e immediately after Position p
-	 * @return new Position of the added element
-	 * @throws IllegalArgumentException if the position is invalid, or the 
-	 *	element is the wrong data type
-	 */
-	Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
+	private Position<Card> startSpades;
+	private Position<Card> startClubs;
+	private Position<Card> startDiamonds;
+	private Position<Card> startHearts;
 	
 	/**
-	 * Replaces the element stored at Position p, returning replaced element
-	 * @return the element being replaced
-	 * @throws IllegalArgumentException if the position is invalid, or the 
-	 *	element is the wrong data type
+	 * Returns an iterator of all the cards the player holds in their hand
+	 * @return iterator of card objects in the player's hand (not position)
 	 */
-	E set(Position<E> p, E e) throws IllegalArgumentException;
+	public Iterator<Card> iterator() {
+		return hand.iterator();
+	}
 	
 	/**
-	 * Removes the element stored at Position p and returns it
-	 * @return the removed element
-	 * @throws IllegalArgumentException if the position is invalid 
+	 * Returns an iterator for only the cards of a specific suit
+	 * @param suit the suit to create the iterator for 
+	 * @return iterator for a specified suit
 	 */
-	E remove(Position<E> p) throws IllegalArgumentExcep
-    
+	public Iterator<Card> suitIterator(Suits suit) {
+		
+		Position<Card> startingPosition;
+		switch (suit) {
+			case SPADES:
+				startingPosition = startSpades;
+				break;
+			case CLUBS:
+				startingPosition = startClubs;
+				break;
+			case DIAMONDS:
+				startingPosition = startDiamonds;
+				break;
+			case HEARTS:
+				startingPosition = startHearts;
+				break;
+			//somethings really up if this happens
+			default:
+				return null;
+		}
+		
+	}
+	
 }
