@@ -264,6 +264,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		public PositionIterator(Position<E> startingPosition) {
 			cursor = startingPosition;
 		}
+	
 		/**
 		 * Tests whether the iterator has a next object
 		 * @return True if there is another object after, false if not
@@ -309,22 +310,32 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 			return new PositionIterator();
 		}
 		
-		public Iterator<Position<E>> iterator(Position<E> startingPosition) {
-			return new PositionIterator(startingPosition);
-		}
+//		public Iterator<Position<E>> iterator(Position<E> startingPosition) {
+//			return new PositionIterator(startingPosition);
+//		}
 	} //--------------- end of nested PositionIterable class ----------------- 
 	
 	/**
-	 * Returns and iterable representation of the list's positions
-	 * @return 
+	 * Returns an iterable representation of the list's positions
+	 * @return iterable of the list's positions 
 	 */
 	public Iterable<Position<E>> positions() {
 		return new PositionIterable();
 	}
 	
+//	/**
+//	 * Returns an iterator representation of the list's positions from a 
+//	 * specified starting point
+//	 * @param startingPosition Position for the start of the iterator
+//	 * @return iterator of the lists positions from a given starting point
+//	 */
+//	public Iterator<Position<E>> positions(Position<E> startingPosition) {
+//		return new PositionIterator(startingPosition);
+//	}
+	
 	//---------------- nested ElementIterator class --------------------------
 	private class ElementIterator implements Iterator<E> {
-		Iterator<Position<E>> posIterator = new PositionIterator(first());
+		Iterator<Position<E>> posIterator = new PositionIterator();
 		
 		/**
 		 * Returns true if there is a next item, false if not
