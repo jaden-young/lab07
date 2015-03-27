@@ -257,6 +257,10 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		private Position<E> cursor;
 		private Position<E> recent = null;
 		
+		public PositionIterator() {
+			cursor = first();
+		}
+		
 		public PositionIterator(Position<E> startingPosition) {
 			cursor = startingPosition;
 		}
@@ -302,7 +306,11 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	private class PositionIterable implements Iterable<Position<E>> {
 		@Override
 		public Iterator<Position<E>> iterator() {
-			return new PositionIterator(first());
+			return new PositionIterator();
+		}
+		
+		public Iterator<Position<E>> iterator(Position<E> startingPosition) {
+			return new PositionIterator(startingPosition);
 		}
 	} //--------------- end of nested PositionIterable class ----------------- 
 	
