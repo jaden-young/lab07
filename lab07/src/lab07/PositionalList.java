@@ -31,5 +31,34 @@ public interface PositionalList<E> {
     /** Inserts element e at the back of the list and returns its Position*/
     Position<E> addLast(E e);
     
-    
+    /** 
+	 * Inserts element e immediately before Position p
+	 * @throws IllegalArgumentException if the position is invalid, or the
+	 *	element is the wrong data type
+	 * @return new Position of added element 
+	 */
+	Position<E> addBefore(Position<E> p, E e) throws IllegalArgumentException;
+	
+	/** 
+	 * Inserts element e immediately after Position p
+	 * @return new Position of the added element
+	 * @throws IllegalArgumentException if the position is invalid, or the 
+	 *	element is the wrong data type
+	 */
+	Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
+	
+	/**
+	 * Replaces the element stored at Position p, returning replaced element
+	 * @return the element being replaced
+	 * @throws IllegalArgumentException if the position is invalid, or the 
+	 *	element is the wrong data type
+	 */
+	E set(Position<E> p, E e) throws IllegalArgumentException;
+	
+	/**
+	 * Removes the element stored at Position p and returns it
+	 * @return the removed element
+	 * @throws IllegalArgumentException if the position is invalid 
+	 */
+	E remove(Position<E> p) throws IllegalArgumentException;
 }
