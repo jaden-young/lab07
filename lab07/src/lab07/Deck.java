@@ -31,7 +31,7 @@ public class Deck {
 	 */
 	public Card card() {
 		Random rand = new Random();
-		return cardDeck.remove(rand.nextInt(cardDeck.size()));
+		return cardDeck.remove(new Random().nextInt(cardDeck.size()));
 	}
 	
 }
