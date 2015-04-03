@@ -2,6 +2,7 @@ package lab07;
 
 import java.util.Iterator;
 import lab07.Card.Suits;
+import lab07.Card.Values;
 
 /**
  *
@@ -16,6 +17,17 @@ public class CardHand {
 	private Position<Card> startDiamonds;
 	private Position<Card> startHearts;
 	
+	private int countSpades;
+	private int countClubs;
+	private int countDiamonds;
+	private int countHearts;
+	
+	/**
+	 * Adds a card to the player's hand
+	 */
+	public void addCard(Values cardValue, Suits cardSuit) {
+	
+	}
 	/**
 	 * Returns an iterator of all the cards the player holds in their hand
 	 * @return iterator of card objects in the player's hand (not position)
@@ -24,32 +36,16 @@ public class CardHand {
 		return hand.iterator();
 	}
 	
-	/**
-	 * Returns an iterator for only the cards of a specific suit
-	 * @param suit the suit to create the iterator for 
-	 * @return iterator for a specified suit
-	 */
-	public Iterator<Card> suitIterator(Suits suit) {
-		
-		Position<Card> startingPosition;
-		switch (suit) {
-			case SPADES:
-				startingPosition = startSpades;
-				break;
-			case CLUBS:
-				startingPosition = startClubs;
-				break;
-			case DIAMONDS:
-				startingPosition = startDiamonds;
-				break;
-			case HEARTS:
-				startingPosition = startHearts;
-				break;
-			//somethings really up if this happens
-			default:
-				return null;
-		}
-		
-	}
+	Iterable<Position<Card>> posIterable = hand.positions();
 	
+	@Override
+	public String toString() {
+		String output = "";
+		Iterable<Position<Card>> handIterable = hand.positions();
+		Iterator<Position<Card>> handIterator = handIterable.iterator();
+		while(handIterator.hasNext()) {
+			output += handIterator.next().getElement().toString();
+		}
+		return output;
+	}
 }
