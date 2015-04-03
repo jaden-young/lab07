@@ -37,7 +37,7 @@ public class Card {
 		private final int cardValue;
 		
 		private Values(int newValue) {
-			cardValue = newValue;
+			this.cardValue = newValue;
 		}
 		
 		public int getCardValue() {
