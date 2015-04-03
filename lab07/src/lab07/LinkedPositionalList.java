@@ -254,16 +254,8 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	
 	//---------------------- nested PositionIterator class ------------------
 	private class PositionIterator implements Iterator<Position<E>> {
-		private Position<E> cursor;
+		private Position<E> cursor = first();
 		private Position<E> recent = null;
-		
-		public PositionIterator() {
-			cursor = first();
-		}
-		
-		public PositionIterator(Position<E> startingPosition) {
-			cursor = startingPosition;
-		}
 	
 		/**
 		 * Tests whether the iterator has a next object
@@ -310,9 +302,6 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 			return new PositionIterator();
 		}
 		
-//		public Iterator<Position<E>> iterator(Position<E> startingPosition) {
-//			return new PositionIterator(startingPosition);
-//		}
 	} //--------------- end of nested PositionIterable class ----------------- 
 	
 	/**
@@ -322,16 +311,6 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	public Iterable<Position<E>> positions() {
 		return new PositionIterable();
 	}
-	
-//	/**
-//	 * Returns an iterator representation of the list's positions from a 
-//	 * specified starting point
-//	 * @param startingPosition Position for the start of the iterator
-//	 * @return iterator of the lists positions from a given starting point
-//	 */
-//	public Iterator<Position<E>> positions(Position<E> startingPosition) {
-//		return new PositionIterator(startingPosition);
-//	}
 	
 	//---------------- nested ElementIterator class --------------------------
 	private class ElementIterator implements Iterator<E> {
@@ -366,7 +345,6 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		}
 	} // -------------- end of nested ElementIterator class ------------------
 	
-	//finally......
 	/**
 	 * Returns an iterator for the elements stored in the list 
 	 * @return an iterator that transverses the elements in the list
